@@ -9,12 +9,6 @@ export default function Button(props) {
     "button--danger": props.danger
   });
 
-  const formatSpots = (num) => {
-    if (!num) return 'no spots remaining';
-    if (num === 1) return `1 spot remaining`;
-    return `${num} spots remaining`;
-  }
-
   return (
     <button
       className={buttonClass}
