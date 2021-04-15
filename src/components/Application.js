@@ -38,13 +38,16 @@ export default function Application(props) {
   
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
-  console.log('dailyAppointments:',dailyAppointments, dailyAppointments.length)
+ 
  
   const appointmentList = dailyAppointments.map((appointment) => {
-    return <Appointment key={appointment.id} {...appointment} />;
+    return <Appointment key={appointment.id}
+    interview={appointment.time}
+    {...appointment} 
+    />;
   });
   
-  console.log('appointmentList:', appointmentList, appointmentList.length);
+
   return (
     <main className="layout">
       <section className="sidebar">

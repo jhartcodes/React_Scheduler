@@ -1,28 +1,7 @@
-// function selectUserByName(state, name) {
-//   const filteredNames = state.users.filter(user => user.name === name);
-//   return filteredNames;
-// }
-
-//  function getAppointmentsForDay (state, day) {
-//   let appointmentsArray = [];
-//   if (state.days) {
-//     for (let d of state.days) {
-//       if (d.name === day) {
-//         for (let id of d.appointments) {
-//           appointmentsArray.push(state.appointments[id])
-//         }
-//       }
-//     }
-//   }
-//   return appointmentsArray;
-// }
-
-// module.exports = getAppointmentsForDay ;
-
 function getAppointmentsForDay(state, day) {
 
   const found = state.days.find(dayApp => dayApp.name === day);
-  console.log('found:',found);
+
 
   if (!found) {
     return [];
@@ -35,6 +14,24 @@ function getAppointmentsForDay(state, day) {
   });
 
   return appt;
-}
+};
 
-module.exports = {getAppointmentsForDay} ;
+ function getInterview(state,interview){
+    
+  if(interview === null) return null;
+
+  let interviewerScheduled ={};
+  for (let key in state.interviewers){
+    if(state.interviewers[key].id === interview.interviewer)
+    interviewerScheduled = state.interviewers[key]
+    console.log('interviewerScheduled:', interviewerScheduled)
+  }
+
+   return  {
+     interviewer:interviewerScheduled,
+     student:interview.student
+   }
+};
+
+
+module.exports = {getAppointmentsForDay,getInterview} ;
