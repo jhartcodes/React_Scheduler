@@ -3,7 +3,7 @@
 //   return filteredNames;
 // }
 
-// export default function getAppointmentsForDay (state, day) {
+//  function getAppointmentsForDay (state, day) {
 //   let appointmentsArray = [];
 //   if (state.days) {
 //     for (let d of state.days) {
@@ -17,21 +17,24 @@
 //   return appointmentsArray;
 // }
 
-// module.exports = { getAppointmentsForDay };
+// module.exports = getAppointmentsForDay ;
 
-export function getAppointmentsForDay(state, day) {
+function getAppointmentsForDay(state, day) {
 
   const found = state.days.find(dayApp => dayApp.name === day);
+  console.log('found:',found);
 
   if (!found) {
     return [];
   }
 
-  const newArr = found.appointments.map(y => {
-    if (state.appointments[y]) {
-      return state.appointments[y]
+  const appt = found.appointments.map(id => {
+    if (state.appointments[id]) {
+      return state.appointments[id]
     }
   });
 
-  return newArr;
+  return appt;
 }
+
+module.exports = {getAppointmentsForDay} ;

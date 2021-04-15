@@ -5,71 +5,9 @@ import "components/Application.scss";
 import DayList from "components/DayList";
 import "components/Appointment";
 import Appointment from "components/Appointment";
+import {getAppointmentsForDay} from 'helpers/selectors'
 
-// const days = [
-//   {
-//     id: 1,
-//     name: "Monday",
-//     spots: 2,
-//   },
-//   {
-//     id: 2,
-//     name: "Tuesday",
-//     spots: 5,
-//   },
-//   {
-//     id: 3,
-//     name: "Wednesday",
-//     spots: 0,
-//   },
-// ];
 
-// const appointments = [
-//   {
-//     id: 1,
-//     time: "12pm",
-//   },
-//   {
-//     id: 2,
-//     time: "1pm",
-//     interview: {
-//       student: "Lydia Miller-Jones",
-//       interviewer: {
-//         id: 1,
-//         name: "Sylvia Palmer",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       },
-//     },
-//   },
-//   {
-//     id: 3,
-//     time: "3pm",
-//     interview: {
-//       student: "Cole Kubossek",
-//       interviewer: {
-//         id: 2,
-//         name: "Joel Hart",
-//         avatar: "https://i.imgur.com/twYrpay.jpg",
-//       },
-//     },
-//   },
-//   {
-//     id: 4,
-//     time: "5pm",
-//   },
-//   {
-//     id:5 ,
-//     time: "11am",
-//     interview: {
-//       student: "Lydia Miller-Jones",
-//       interviewer: {
-//         id: 3,
-//         name: "Ben Mussche",
-//         avatar: "https://i.imgur.com/FK8V841.jpg",
-//       },
-//     },
-//   },
-// ];
 
 export default function Application(props) {
   const [state, setState] = useState({
@@ -82,21 +20,31 @@ export default function Application(props) {
 
   const setDays = days => setState(prev => ({ ...prev, days }));
 
-  const dailyAppointments = [];
-
-  const appointmentList = dailyAppointments.map((appointment) => {
-    return <Appointment key={appointment.id} {...appointment} />;
-  });
+  
 
   useEffect(() => {
-    axios.get('/api/days')
-    .then(response => {
-      setDays(response.data) 
+    Promise.all([
+    axios.get('/api/days'),
+    axios.get('/api/appointments'),
+    axios.get('/api/interviewers')
+  ])
+    .then(all=> {
+      const [daysList, appointmentsList, interviewersList] = all
+      console.log('test', daysList.data, appointmentsList.data, interviewersList.data)
+      setState(prev =>({...prev, days: daysList.data, appointments: appointmentsList.data, interviewers: interviewersList.data }))
     })
 
   }, [])
   
 
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  console.log('dailyAppointments:',dailyAppointments, dailyAppointments.length)
+ 
+  const appointmentList = dailyAppointments.map((appointment) => {
+    return <Appointment key={appointment.id} {...appointment} />;
+  });
+  
+  console.log('appointmentList:', appointmentList, appointmentList.length);
   return (
     <main className="layout">
       <section className="sidebar">
