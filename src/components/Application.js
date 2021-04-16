@@ -5,7 +5,7 @@ import "components/Application.scss";
 import DayList from "components/DayList";
 import "components/Appointment";
 import Appointment from "components/Appointment";
-import {getAppointmentsForDay,getInterview} from 'helpers/selectors'
+import {getAppointmentsForDay,getInterview,getInterviewersForDay} from 'helpers/selectors'
 
 
 
@@ -16,6 +16,22 @@ export default function Application(props) {
     appointments: {},
     interviewers: {}
   });
+
+  const bookInterview = (id, interview) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    setState({
+      ...state,
+      appointments
+    });
+  }
+
 
   const setDay = day => setState({ ...state, day });
 
@@ -37,15 +53,20 @@ export default function Application(props) {
 
   }, [])
   
-
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
-  
+ 
+  const dailyAppointments = getAppointmentsForDay(state, state.day);  
  
   const appointmentList = dailyAppointments.map((appointment) => {
+
   const interview = getInterview(state, appointment.interview);
+  const interviewers =getInterviewersForDay(state, state.day)
+
     // / unsure of where interview = {getInterview(state,) before i had interview={appointment.time}
     return <Appointment key={appointment.id} {...appointment} 
     interview ={interview}
+    interviewers ={interviewers}
+    bookInterview={bookInterview}
+
     />;
   });
   
