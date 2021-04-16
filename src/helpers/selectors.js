@@ -24,7 +24,6 @@ function getAppointmentsForDay(state, day) {
   for (let key in state.interviewers){
     if(state.interviewers[key].id === interview.interviewer)
     interviewerScheduled = state.interviewers[key]
-    console.log('interviewerScheduled:', interviewerScheduled)
   }
 
    return  {
@@ -47,7 +46,6 @@ function getInterviewersForDay(state, day) {
       return state.interviewers[id]
     }
   });
-  console.log('interviewer.length', interviewer.length)
   return interviewer;
 };
 

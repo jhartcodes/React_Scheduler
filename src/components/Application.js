@@ -26,10 +26,13 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    setState({
+
+    axios.put('/api/appointments/:id')
+    .then(()) =>  setState({
       ...state,
       appointments
-    });
+    }));
+  
   }
 
 
@@ -47,7 +50,6 @@ export default function Application(props) {
   ])
     .then(all=> {
       const [daysList, appointmentsList, interviewersList] = all
-      console.log('test', daysList.data, appointmentsList.data, interviewersList.data)
       setState(prev =>({...prev, days: daysList.data, appointments: appointmentsList.data, interviewers: interviewersList.data }))
     })
 
