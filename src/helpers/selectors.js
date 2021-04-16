@@ -33,5 +33,23 @@ function getAppointmentsForDay(state, day) {
    }
 };
 
+function getInterviewersForDay(state, day) {
 
-module.exports = {getAppointmentsForDay,getInterview} ;
+  const found = state.days.find(dayApp => dayApp.name === day);
+
+
+  if (!found) {
+    return [];
+  }
+
+  const interviewer = found.interviewers.map(id => {
+    if (state.interviewers[id]) {
+      return state.interviewers[id]
+    }
+  });
+  console.log('interviewer.length', interviewer.length)
+  return interviewer;
+};
+
+
+module.exports = {getAppointmentsForDay,getInterview,getInterviewersForDay} ;

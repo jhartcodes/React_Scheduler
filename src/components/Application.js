@@ -13,7 +13,8 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: 'Monday',
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   });
 
   const setDay = day => setState({ ...state, day });
@@ -41,10 +42,10 @@ export default function Application(props) {
   
  
   const appointmentList = dailyAppointments.map((appointment) => {
-    // unsure of where interview = {getInterview(state,) before i had interview={appointment.time}
-    return <Appointment key={appointment.id}
-    interview={getInterview(state, appointment.interview)}
-    {...appointment} 
+  const interview = getInterview(state, appointment.interview);
+    // / unsure of where interview = {getInterview(state,) before i had interview={appointment.time}
+    return <Appointment key={appointment.id} {...appointment} 
+    interview ={interview}
     />;
   });
   
