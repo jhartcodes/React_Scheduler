@@ -11,7 +11,8 @@ export default function useApplication(){
 
   const setDay = day => setState({ ...state, day });
   
-  const setDays = days => setState(prev => ({ ...prev, days }));
+  // never used receiving warnings, but i feel like might still be needed. 
+  // const setDays = days => setState(prev => ({ ...prev, days }));
   
   useEffect(() => {
     Promise.all([
