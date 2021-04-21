@@ -83,6 +83,7 @@ export default {
     }
   }),
   put: jest.fn(url => {
+    console.log('url', url)
     if (url === "/api/appointments/1") {
       return Promise.resolve({
         status: 200,
@@ -90,14 +91,6 @@ export default {
       });
     }
 
-    if (url === "/api/appointments/3") {
-      return Promise.resolve({
-        status: 200,
-        statusText: "No Content",
-      });
-    }
-  }),
-  put: jest.fn(url => {
     if (url === "/api/appointments/3") {
       return Promise.resolve({
         status: 200,
