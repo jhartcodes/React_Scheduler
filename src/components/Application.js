@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import "components/Application.scss";
+import Header from "./Appointment/Header"
 import DayList from "components/DayList";
 import "components/Appointment";
 import Appointment from "components/Appointment";
@@ -57,8 +58,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {appointmentList}
-        <Appointment key="last" time="5pm" />
-        <nav></nav>
+        <Header time="5pm" />
       </section>
     </main>
   );

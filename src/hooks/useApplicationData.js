@@ -11,9 +11,6 @@ export default function useApplication() {
 
   const setDay = (day) => setState({ ...state, day });
 
-  // never used receiving warnings, but i feel like might still be needed.
-  // const setDays = days => setState(prev => ({ ...prev, days }));
-
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -31,6 +28,7 @@ export default function useApplication() {
     });
   }, []);
 
+  // function to update daylist to render spots. 
   const newSpotDay = (dayName, daysArr, add) => {
     for (let day of daysArr) {
       if (day.name === dayName) {
@@ -41,6 +39,7 @@ export default function useApplication() {
     }
   };
 
+  //map the days array and pass in the update day. 
   const newDaysArr = (dayObj, daysArr) => {
     return daysArr.map((day) => (day.name === dayObj.name ? dayObj : day));
   };
