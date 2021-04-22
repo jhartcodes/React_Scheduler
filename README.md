@@ -6,6 +6,15 @@ Built with ReactJS, as a bootcamp project with fictional data to explore and pra
 
 The app is well tested through unit tests, integration tests, and full end to end tests utilizing various testing libraries and frameworks such as Storybook, Jest, Cypress, Mocha, and Chai.
 
+## Preview Images
+!["Webpage Display"](https://github.com/joelhart89/React_Scheduler/blob/master/docs/Display.png?raw=true)
+
+## Create Appointment
+!["Create Appointment"](https://github.com/joelhart89/React_Scheduler/blob/master/docs/Create.appointment.png?raw=true)
+
+## Delete Appointment
+
+!["Delete Appointment"](https://github.com/joelhart89/React_Scheduler/blob/master/docs/Delete.appointment.png?raw=true)
 ## Getting Started
 1. Fork this repository, then clone your fork of this repository.
 2. Install dependencies using the `npm install` command.
